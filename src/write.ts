@@ -436,7 +436,7 @@ async function writeBenchmarkToGitHubPages(bench: Benchmark, config: Config): Pr
     if (!skipFetchGhPages) {
         await git.cmd('fetch', 'origin', `${ghPagesBranch}:${ghPagesBranch}`);
     }
-    await git.cmd('switch', ghPagesBranch);
+    await git.cmd('checkout', ghPagesBranch);
     try {
         return await writeBenchmarkToGitHubPagesWithRetry(bench, config, 10);
     } finally {
