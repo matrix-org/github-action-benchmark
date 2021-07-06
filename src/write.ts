@@ -436,7 +436,8 @@ async function writeBenchmarkToGitHubPages(bench: Benchmark, config: Config): Pr
     if (!skipFetchGhPages) {
         await git.cmd('fetch', 'origin', `${ghPagesBranch}:${ghPagesBranch}`);
     }
-    await git.cmd('checkout', ghPagesBranch);
+    // Using force to prevent the pipeline from failing when there's a local diff
+    await git.cmd('checkout -f', ghPagesBranch);
     try {
         return await writeBenchmarkToGitHubPagesWithRetry(bench, config, 10);
     } finally {
