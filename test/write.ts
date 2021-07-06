@@ -925,13 +925,13 @@ describe('writeBenchmark()', function() {
             const skipFetch = cfg.skipFetch ?? false;
             const hist: Array<[GitFunc, unknown[]] | undefined> = [
                 skipFetch ? undefined : ['cmd', ['fetch', 'origin', 'gh-pages:gh-pages']],
-                ['cmd', ['checkout', 'gh-pages']],
+                ['cmd', ['checkout -f', 'gh-pages']],
                 fetch ? ['pull', [token, 'gh-pages']] : undefined,
                 ['cmd', ['add', path.join(dir, 'data.js')]],
                 addIndexHtml ? ['cmd', ['add', path.join(dir, 'index.html')]] : undefined,
                 ['cmd', ['commit', '-m', 'add Test benchmark (cargo) benchmark result for current commit id']],
                 autoPush ? ['push', [token, 'gh-pages']] : undefined,
-                ['cmd', ['checkout', '-']], // Return from gh-pages
+                ['cmd', ['checkout -f', '-']], // Return from gh-pages
             ];
             return hist.filter((x: [GitFunc, unknown[]] | undefined): x is [GitFunc, unknown[]] => x !== undefined);
         }
