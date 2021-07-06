@@ -925,7 +925,7 @@ describe('writeBenchmark()', function() {
             const skipFetch = cfg.skipFetch ?? false;
             const hist: Array<[GitFunc, unknown[]] | undefined> = [
                 skipFetch ? undefined : ['cmd', ['fetch', 'origin', 'gh-pages:gh-pages']],
-                ['cmd', ['switch', 'gh-pages']],
+                ['cmd', ['checkout', 'gh-pages']],
                 fetch ? ['pull', [token, 'gh-pages']] : undefined,
                 ['cmd', ['add', path.join(dir, 'data.js')]],
                 addIndexHtml ? ['cmd', ['add', path.join(dir, 'index.html')]] : undefined,
