@@ -436,13 +436,12 @@ async function writeBenchmarkToGitHubPages(bench: Benchmark, config: Config): Pr
     if (!skipFetchGhPages) {
         await git.cmd('fetch', 'origin', `${ghPagesBranch}:${ghPagesBranch}`);
     }
-    // Using force to prevent the pipeline from failing when there's a local diff
-    await git.cmd('checkout -f', ghPagesBranch);
+    await git.cmd('checkout', '--force', ghPagesBranch);
     try {
         return await writeBenchmarkToGitHubPagesWithRetry(bench, config, 10);
     } finally {
         // `git switch` does not work for backing to detached head
-        await git.cmd('checkout -f', '-');
+        await git.cmd('checkout', '--force', '-');
     }
 }
 
