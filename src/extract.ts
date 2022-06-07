@@ -150,7 +150,7 @@ function getCommit(): Commit {
     if (github.context.payload.head_commit) {
         return github.context.payload.head_commit;
     }
-    
+
     if (github.context.payload.workflow_run) {
         return github.context.payload.workflow_run.head_sha;
     }
