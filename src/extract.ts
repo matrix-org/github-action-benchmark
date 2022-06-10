@@ -152,7 +152,7 @@ function getCommit(): Commit {
     }
     
     if (github.context.payload.workflow_run) {
-        return github.context.payload.workflow_run.head_sha;
+        return github.context.payload.workflow_run.head_commit;
     }
 
     const pr = github.context.payload.pull_request;
